@@ -17,8 +17,8 @@ public class TicTacToeGUI extends JFrame {
 	JButton resetButton = new JButton("Reset");
 	JFrame frame = new JFrame("Mitch's Tic Tac Toe");
 
-	TicTacToe board = new TicTacToe('X', 'O');
-	Computer opponent = new Computer();
+	Board board = new Board('X', 'O');
+	Opponent opponent = new Opponent();
 
 	public TicTacToeGUI() {
 		frame.setSize(600, 600);
@@ -38,7 +38,7 @@ public class TicTacToeGUI extends JFrame {
 		mainPanel.add(resetButton);
 
 		resetButton.addActionListener(new myActionListener());
-		
+
 		// Initialise all the buttons
 		for(int i=0; i<9; i++) {
 			boardButtons[i] = new JButton();
@@ -48,9 +48,10 @@ public class TicTacToeGUI extends JFrame {
 
 			gameBoard.add(boardButtons[i]); 
 			boardButtons[i].addActionListener(new myActionListener());
-			boardButtons[i].setFont(new Font("Arial", Font.BOLD, 100));
+			boardButtons[i].setFont(new Font("Tahoma", Font.BOLD, 100));
 		}
 	}
+	// Listen for when the buttons are clicked
 	private class myActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent action) {
 			int computerMove;
@@ -59,12 +60,13 @@ public class TicTacToeGUI extends JFrame {
 			for (int i=0; i<9; i++) {
 				if (action.getSource() == boardButtons[i] && 
 						board.spotAvailable(i)) {
-					
+
 					// Player turn
 					board.newPiece(board.getPlayer(), i);
 					boardButtons[i].setText(Character.toString(board.getPlayer()));
 					boardButtons[i].setForeground(Color.GREEN);
 
+					// If player has won, end game
 					if (board.isWinner(board.getPlayer())) {
 						gameOver();
 					}
@@ -72,13 +74,17 @@ public class TicTacToeGUI extends JFrame {
 					// Computer turn
 					computerMove = opponent.getMove(board);
 
+					// If computer has a legal move
 					if (computerMove != -1) {
 						board.newPiece(board.getComputer(), computerMove);
 						boardButtons[computerMove].setText(Character.toString(board.getComputer()));
 						boardButtons[computerMove].setForeground(Color.YELLOW);
+
+						// If computer has won, end game
 						if (board.isWinner(board.getComputer())) {
 							gameOver();
 						}
+						// Game was a tie
 					} else {
 						gameOver();
 					}
@@ -95,6 +101,7 @@ public class TicTacToeGUI extends JFrame {
 			}
 		}
 	}
+	// When the game is over, display any winners in the title
 	public void gameOver() {
 		for (int i=0; i<9; i++) {
 			boardButtons[i].setEnabled(false);

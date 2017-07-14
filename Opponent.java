@@ -1,8 +1,8 @@
 
-public class Computer {
+public class Opponent {
 	// Will return the index of the best move to make
-	public int getMove(TicTacToe board) {
-		TicTacToe boardCopy = board.copy();
+	public int getMove(Board board) {
+		Board boardCopy = board.copy();
 
 		// Take middle if it's not taken
 		if (boardCopy.spotAvailable(4)) {
@@ -61,9 +61,9 @@ public class Computer {
 		return -1;
 	}
 	// Returns index of first position that wins the game for piece
-	public int findWinPosition(TicTacToe board, char piece) {
-		TicTacToe boardCopy = board.copy();
-		TicTacToe newBoardCopy;
+	public int findWinPosition(Board board, char piece) {
+		Board boardCopy = board.copy();
+		Board newBoardCopy;
 
 		// Return index of first winning spot for piece
 		for (int i=0; i<boardCopy.getLength(); i++) {
@@ -80,10 +80,10 @@ public class Computer {
 	}
 	// Return index of position that leads to a particular number of possible 
 	// wins on the next turn (Only works with 1 or 2 wins)
-	public int findFork(TicTacToe board, char piece, int wins) {
-		TicTacToe boardCopy = board.copy();
-		TicTacToe newBoardCopy;
-		TicTacToe newBoardCopy2;
+	public int findFork(Board board, char piece, int wins) {
+		Board boardCopy = board.copy();
+		Board newBoardCopy;
+		Board newBoardCopy2;
 
 		int totalWins;
 

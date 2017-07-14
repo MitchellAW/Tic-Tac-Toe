@@ -1,5 +1,5 @@
 
-public class TicTacToe {
+public class Board {
 	// The Tic Tac Toe board filled with the pieces
 	private char[] board = {' ',' ',' ',
 			' ',' ',' ',
@@ -9,15 +9,12 @@ public class TicTacToe {
 	private char player;
 	private char computer;
 
-	public TicTacToe(char player, char computer) {
+	public Board(char player, char computer) {
 		this.player = player;
 		this.computer = computer;
 	}
 	public char getPlayer() {
 		return this.player;
-	}
-	public void setPlayer(char player) {
-		this.player = player;
 	}
 	public char getComputer() {
 		return this.computer;
@@ -62,8 +59,8 @@ public class TicTacToe {
 		return false;
 	}
 	// Create a copy of the TicTacToe object in it's current state
-	public TicTacToe copy() {
-		TicTacToe newBoard = new TicTacToe(this.player, this.computer);
+	public Board copy() {
+		Board newBoard = new Board(this.player, this.computer);
 		for (int i=0; i<this.board.length; i++) {
 			newBoard.board[i] = this.board[i];
 		}
