@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class TicTacToeGUI extends JFrame {
@@ -107,10 +108,14 @@ public class TicTacToeGUI extends JFrame {
 			boardButtons[i].setEnabled(false);
 		}
 		if (board.isWinner(board.getPlayer())) {
+			JOptionPane.showMessageDialog(frame, "CONGRATULATIONS! YOU WIN!");						
 			frame.setTitle("Mitch's Tic Tac Toe: ***** PLAYER WINS *****");
 		} else if (board.isWinner(board.getComputer())) {
 			frame.setTitle("Mitch's Tic Tac Toe: ***** COMPUTER WINS *****");
+			JOptionPane.showMessageDialog(frame, "Bad luck. You Lose.");						
+
 		} else {
+			JOptionPane.showMessageDialog(frame, "Draw.");						
 			frame.setTitle("Mitch's Tic Tac Toe: ***** IT'S A DRAW *****");
 		}
 	}
